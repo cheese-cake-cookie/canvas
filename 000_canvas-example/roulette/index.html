@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roulette</title>
+    <script src="roulette.js" type="module"></script>
+  </head>
+
+  <body>
+    <button id="start">시작</button>
+    <button id="stop">멈춤</button>
+  </body>
+  <script type="module">
+    import { Roulette } from "./roulette.js";
+
+    const startButon = document.getElementById("start");
+    const stopButon = document.getElementById("stop");
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const stageWidth = window.innerWidth;
+    const stageHeight = window.innerHeight;
+
+    canvas.width = stageWidth;
+    canvas.height = stageHeight;
+
+    document.body.appendChild(canvas);
+
+    const roulette = new Roulette(stageWidth / 2, stageHeight / 2);
+
+    ctx.translate(stageWidth / 2, stageHeight / 2);
+    roulette.draw(ctx);
+
+    startButon.addEventListener("click", () => {
+      roulette.spin(ctx);
+    });
+
+    stopButon.addEventListener("click", () => {
+      roulette.stop(ctx);
+    });
+  </script>
+</html>
